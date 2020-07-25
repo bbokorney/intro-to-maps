@@ -1,6 +1,6 @@
 # Intro to Maps
 
-This repo contains an introduction to hash maps. It uses Javascript
+This repo contains an introduction to maps. It uses Javascript
 as the example language, but these concepts apply to any programming
 language which has maps (which is probably almost all of them).
 
@@ -14,10 +14,10 @@ and knowing how to use them is essential to becoming a skilled programmer.
 ## What's a map?
 
 A [map (sometimes called a _hash map_ or _hash table_)](https://en.wikipedia.org/wiki/Hash_table)
-is a data structure which has maintains a _mapping_ from a set of _keys_ to a set of _values_.
+is a data structure which maintains a _mapping_ from a set of _keys_ to a set of _values_.
 
 In a map, the _key_ is the item which you _index_ the data structure with. You tell the map
-to store a specific _value_ with that key. At a later time you can query the map with the same key
+to store a specific _value_ for that key. At a later time you can query the map using the same key
 and it will return the same value you stored at that key. Let's see an example.
 
 ```javascript
@@ -26,7 +26,7 @@ and it will return the same value you stored at that key. Let's see an example.
 Map {}
 
 // Store a mapping from 'key-1' to 'value-1'.
-// You write to the map using the `set('key', 'value')` function.
+// You write to the map using the set('key', 'value') function.
 > myMap.set('key-1', 'value-1')
 Map { 'key-1' => 'value-1' }
 
@@ -36,7 +36,7 @@ Map { 'key-1' => 'value-1', 'key-2' => 'value-2' }
 
 // Query the map for the value mapped to 'key-1'.
 // It returns the same value we previously stored.
-// You read from the map using the `get('key')` function,
+// You read from the map using the get('key') function,
 // which returns the value stored at that key.
 > myMap.get('key-1')
 'value-1'
@@ -56,10 +56,10 @@ Map { 'key-1' => 'value-1', 'key-2' => 'value-2' }
 Map { 'key-1' => 'value-1', 'key-2' => 'value-2' }
 ```
 
-## Updating keys
+## Updating values
 
 If you already have a particular key in the map, you can
-call `set('key', 'value') on the existing key with a new value
+call `set('key', 'value')` on the existing key with a new value
 to update the value mapped to that key.
 
 ```javascript
@@ -78,7 +78,7 @@ Map { 'key' => 'new value' }
 
 ## Deleting keys
 
-You can remove a key => value mapping from
+You can remove a `key => value` mapping from
 the map using the `delete('key')` function.
 
 ```javascript
@@ -166,13 +166,13 @@ using the `Array.from()` function.
 
 ## Example: word count
 
-Let's see an example use case of map to solve the following problem:
+Let's see an example of using a map to solve the following problem:
 
 Given an array of different words, some of which may appear multiple times,
 for each word, print how many times the word appears in the array.
 
 ```javascript
-// The array of words to counts.
+// The array of words to count.
 words = [
   'some words', 'repeat', 'word', 'test', 'repeat',
   'repeat', 'some words', 'test', 'another word', 'test'
@@ -187,7 +187,7 @@ wordCounts = new Map()
 for(let word of words) {
   // Check if we haven't seen this word before.
   if(!wordCounts.has(word)) {
-    // We haven't seen this word before. Set its count to 0.
+    // We haven't seen this word before. Set its count to 0
     // because next in the loop we'll increment the count by 1.
     wordCounts.set(word, 0)
   }
@@ -219,7 +219,7 @@ Word 'another word' appeared 1 time(s).
 
 ## Example: unique words
 
-A common problem when programming is to need a list of unique items. Maps
+A common problem when programming is needing a list of unique items. Maps
 can help with this because the set of keys are always guaranteed to be unique.
 We can create a unique list of items by inserting them as the keys of a map. In this case
 it doesn't matter what value we're storing with each key, we're only interested
@@ -251,6 +251,8 @@ for(let word of uniqueWords.keys()) {
 }
 ```
 
+When we run the program we get this output.
+
 ```
 $ node unique-words/unique-words.js
 Unique words
@@ -269,7 +271,7 @@ the map, we only get each word once.
 ## Example: User comments
 
 Maps are useful when you have a unique identifier which can be used
-to tie together multiple pieces of data. A common identifier in many
+to associate multiple pieces of data. A common identifier in many
 computer systems is a user id. User ids are helpful because in most systems
 they are guaranteed to be unique among all users of the system. Let's
 see how maps can be used in conjunction with user ids to solve the following problem:
@@ -295,20 +297,21 @@ userCommentsMap = new Map()
 
 // Go through each comment.
 for(let comment of comments) {
-  // Check if we've seen this user before.
+  // Check if we haven't seen this user before.
   if(!userCommentsMap.has(comment.username)) {
-    // If we have seen this user before, initialize their
+    // If we haven't seen this user before, initialize their
     // list of comments to an empty array.
     userCommentsMap.set(comment.username, [])
   }
 
   // In one line we're doing the following:
-  // Getting the array of comments for this user.
-  // Appending the new comment to the array.
+  // - Getting the array of comments for this user.
+  // - Appending the new comment to the array.
   userCommentsMap.get(comment.username).push(comment.text)
 }
 
 // Print out the comments grouped by the author.
+
 // Go through the list of usernames.
 for(let username of userCommentsMap.keys()) {
   console.log("User comments for '" + username + "':")
@@ -320,7 +323,7 @@ for(let username of userCommentsMap.keys()) {
 }
 ```
 
-If we run this program we get the following output:
+If we run this program we get the following output.
 
 ```
 $ node user-comments/user-comments.js
@@ -336,7 +339,7 @@ User comments for 'baker':
 ```
 
 You can imagine how if we needed all the comments for username
-'vatsal' then we could quickly look them up in the map, which is
+`'vatsal'` then we could quickly look them up in the map, which is
 easier than going through the list of comments every time (it
 will also have better performance and run faster).
 

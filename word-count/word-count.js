@@ -1,4 +1,4 @@
-// The array of words to counts.
+// The array of words to count.
 words = [
   'some words', 'repeat', 'word', 'test', 'repeat',
   'repeat', 'some words', 'test', 'another word', 'test'

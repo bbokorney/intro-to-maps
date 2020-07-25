@@ -13,20 +13,21 @@ userCommentsMap = new Map()
 
 // Go through each comment.
 for(let comment of comments) {
-  // Check if we've seen this user before.
+  // Check if we haven't seen this user before.
   if(!userCommentsMap.has(comment.username)) {
-    // If we have seen this user before, initialize their
+    // If we haven't seen this user before, initialize their
     // list of comments to an empty array.
     userCommentsMap.set(comment.username, [])
   }
 
   // In one line we're doing the following:
-  // Getting the array of comments for this user.
-  // Appending the new comment to the array.
+  // - Getting the array of comments for this user.
+  // - Appending the new comment to the array.
   userCommentsMap.get(comment.username).push(comment.text)
 }
 
 // Print out the comments grouped by the author.
+
 // Go through the list of usernames.
 for(let username of userCommentsMap.keys()) {
   console.log("User comments for '" + username + "':")
