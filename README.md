@@ -343,17 +343,49 @@ You can imagine how if we needed all the comments for username
 easier than going through the list of comments every time (it
 will also have better performance and run faster).
 
-## Example: Unique usernames
+## Arrays/Lists vs Maps
 
-TODO add example
+Arrays and maps have some similarities, but also some important differences.
+Here's some advice on when to use each.
 
-Useful when you have a unique id, which is common. Username to user info mapping. Check if username is already taken
+### Indexing
 
-## Arrays vs Maps
+In an array, the index is always an integer. In a map, the index (key)
+can be any value. If you need your indexes to be something other
+than a integer, a map is your best choice.
 
-TODO expand
+Even if all your indexes are integers, if your indexes don't cover a
+complete range of integers, then you're probably better off using a map to store your data.
 
-- Keys need not be integers. They can be any object which can be hashed to a value, and
-are often strings
-- There is no ordering
+For example, if you had a system where user ids were an integer between 0 and 1,000,000
+but you only have about 500 users in your system, storing the users in an array would be wasteful
+because it would require using an array of length 1,000,000. Most of the spaces
+in the array would be empty and unused. In this case, a map would be better because
+it would only require the storage space needed for the 500 users.
 
+### Ordering
+
+Arrays maintain an order to their elements. The integer of the
+index represents the position of the element in the array.
+
+Maps on the other hand have _no ordering whatsoever_. When you iterate over the keys or values of
+a map, you cannot rely on them having any order. If you need a particular order,
+then you should convert the keys or values into an array and sort them into
+the order that you need.
+
+If you need some kind of ordering, you'll probably need an array to maintain
+that ordering, since a map gives you no ordering.
+
+### Mapping associations
+
+If your data points have no inherent mapping associations which you need to maintain,
+then an array might work just fine.
+
+For example, suppose in a food ordering system 
+you had a list of ice cream flavors the user could choose from.
+If you just needed to keep a list of the names of the available
+flavors, you might be able to store them in array.
+
+However if you have a set of data points that don't have any associations,
+but you're adding to and removing from, and you want to keep those data points unique,
+then you might want to considering storing the data points as keys in a map.
